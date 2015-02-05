@@ -61,7 +61,7 @@ become large but very sparse.
 27363 L1 Data cache Misses
 
 ###SSSP using PQ Half Connected Graph :
-1766
+1766 L1 Data cache Misses
 
 ###SSSP using Q Cycle Graph:
 302 L1 Data Cache Misses
