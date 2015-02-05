@@ -57,14 +57,14 @@ For sparsely connected graphs, the overhead of inserting into a priority queue a
 the data it stores leads to more cache misses which decreases performance when the graphs
 become large but very sparse.
 
-###SSSP using PQ Cycle Graph:
+####SSSP using PQ Cycle Graph:
 27363 L1 Data cache Misses
 
-###SSSP using PQ Half Connected Graph :
+####SSSP using PQ Half Connected Graph :
 1766 L1 Data cache Misses
 
-###SSSP using Q Cycle Graph:
+####SSSP using Q Cycle Graph:
 302 L1 Data Cache Misses
 
-###SSSP using Q Half Connected Graph:
+####SSSP using Q Half Connected Graph:
 1892 L1 Data Cache Misses
