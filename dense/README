@@ -1,0 +1,5 @@
+The files are compiled with:
+./compile
+
+The programs using the Queue in assignment 4 were used to obtain the results.In particular: adj_bfs.c and adj_bfs_half.c were tested against the 
+corresponding Priority Queue implementation. 

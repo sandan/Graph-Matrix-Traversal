@@ -1,0 +1,10 @@
+gcc -Wall -Werror -I$TACC_PAPI_INC -o ring -lrt -DN=4096 -DFLUSH_SIZE=1024*32 -L$TACC_PAPI_LIB -lpapi adj_bfs.c
+
+gcc -Wall -Werror -I$TACC_PAPI_INC -o half -lrt -DN=4096 -DFLUSH_SIZE=1024*32 -L$TACC_PAPI_LIB -lpapi adj_bfs_half.c
+
+
+gcc -Wall -Werror -I$TACC_PAPI_INC -o crs_ring -lrt -DN=4096 -DFLUSH_SIZE=1024*32 -L$TACC_PAPI_LIB -lpapi crs_bfs_ring.c
+
+
+gcc -Wall -Werror -I$TACC_PAPI_INC -o crs_half -lrt -DN=4096 -DFLUSH_SIZE=1024*32 -L$TACC_PAPI_LIB -lpapi crs_bfs_half.c
+
