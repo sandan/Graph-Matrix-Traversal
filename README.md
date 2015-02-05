@@ -34,7 +34,7 @@ Implements Djikstra SSSP BFS level labeling over sparse matrices with CRS repres
 A Breadth First single source shortest path (SSSP) algorithm was implemented
 to investigate the performance of different graphs having varying edge density.
 The algorithm ws implemented with a Piority Queue that had an ExtractMin operation
-that effciently extracts the minimum node with the smallest label value (O(log(|V |)) prioroty
+that effciently extracts the minimum node with the smallest label value (O(log(|V|)) prioroty
 queue operations). 
 
 This improves the performance of the algorithm asymptotically to
@@ -45,11 +45,8 @@ the labels of the other nodes), is O(|E|) since you have to check all the edges 
 in the queue so far.
 
 
-The experiments were done similarly for the previous assignment using different edge
-density edges. Both use a matrix data representation for the graph and only differ in the
-kind of queue used, The number of nodes in each matrix is N = 4096. The matrices are
-sparse 0-1 matrices. These results were chosen experimentally to see the overall algorithmic
-behavior between the two implementations
+Both use a matrix data representation for the graph and only differ in the
+kind of queue used, The number of nodes in each matrix is N = 4096.
 
 The results were obtained using the PAPI L1 data cache miss counter. The results show
 that using a priority does help when graphs are more dense rather than sparsely connected.
