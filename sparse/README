@@ -1,6 +1,0 @@
-Each implementation has its own program.
-run the executable for the number of L1 data cache misses.
-Make sure papi is loaded using module load papi.
-
-To Compile:
-./compile
