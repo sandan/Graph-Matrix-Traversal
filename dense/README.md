@@ -5,8 +5,7 @@ Graph Traversal was implemented with a piority queue that had an ExtractMin oper
 that effciently extracts the minimum node with the smallest label value (O(log(|V|))). 
 
 This improves the performance of the algorithm asymptotically to
-O(|E|log(|V|)). Using a simple queue, the running time is O(|V||E|) since there are |V | − 1 iterations at 
-most in the loop and you have to check all the edges for each node in the queue so far.
+O(|E| + |V|log(|V|)).
 
  * SSSP using PQ Cycle Graph:
   *27363 L1 Data cache Misses
