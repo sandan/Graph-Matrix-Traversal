@@ -1,0 +1,5 @@
+gcc -Wall -Werror -I$TACC_PAPI_INC -o PQ_ring -lrt -DN=4096 -DFLUSH_SIZE=1024*32 -L$TACC_PAPI_LIB -lpapi PQ_ssp_ring.c
+
+gcc -Wall -Werror -I$TACC_PAPI_INC -o PQ_half -lrt -L$TACC_PAPI_LIB -lpapi -DN=4096 -DFLUSH_SIZE=1024*32 PQ_ssp_half.c
+
+
