@@ -27,11 +27,8 @@ void adj_lvl_labeling(vertex V[N], priority_queue* pq, vertex source, int Graph[
 }
 
 void dijkstra(priority_queue* pq, vertex V[N], Graph[N][N]){
- //initialize vertices
- for (int i = 1; i < N; i++){
-  V[i].unvisited = true;
-  V[i].label = INT_MAX;
- }
+ //initialize vertices handled in the setup() of calling program
+
  //the vertex to start the algorithm with
  adj_lvl_labeling(V,pq,V[0],Graph);
 
