@@ -6,9 +6,11 @@
 #include <assert.h>
 #include <papi.h>
 
-priority_queue pq;
+/* allocate space for HALF and vertices array for the queue */
 vertex vertices[N]; //N is set at compile time
-int HALF[N][N];     //adj matrix rep of half-connected graph
+int RING[N][N]; //adj matrix rep of ring graph
+
+priority_queue pq;
 
 /* zero out FLUSH_SIZE bytes in memory*/
 int flush(){
@@ -23,26 +25,24 @@ return 0;
 
 void setup(){
  srand(time(NULL));
- int i;
+ 
  /*initialize the vertices array to access nodes*/
- for (i=0; i<N; ++i){
+ for (int i=0; i<N; ++i){
    vertex v;
-   v.label = INT_MAX;
    v.unvisited = true;
+   v.label = INT_MAX;
    v.id=i;
    vertices[i]=v;
  }
 
-  /*create the HALF graph*/
- int j, row;
- for (i=0; i<N; i++){
+ /*create the RING graph*/
+ int row;
+ for (i=0; i<N-1; i++){
   row=vertices[i].id;
-  for(j=0; j<N;j++){
-   if(rand()%2==1){
-    HALF[row][j]=1;
-   }
-  }
+  RING[row][row+1]=1;  //complicate by adding non-neg weights
  }
+ row=vertices[i+1].id;
+ RING[row][0]=1;  //complicate
 }
 
 void handle_error(int retval){
@@ -82,7 +82,7 @@ int main(){
           handle_error(1);
   
   /* BFS level labeling */
-  adj_lvl_labeling(pq, vertices,HALF);
+  adj_lvl_labeling(pq, vertices,RING);
   
   /* stop counting in the Event Set */
   if (PAPI_stop(EventSet, values) != PAPI_OK)
