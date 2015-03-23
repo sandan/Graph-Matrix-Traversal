@@ -1,35 +1,44 @@
 #include <limits.h>
+#include "../include/priority_q.h"
 
-struct priority_queue pq;
+void adj_lvl_labeling(vertex V[N], priority_queue* pq, vertex source, int Graph[N][N]){
 
+ source.unvisited = false;
+ source.label = 0;
+ pq_insert(pq,source);
 
-void adj_lvl_labeling(vertex source, int Graph[N][N]){
- source.label=0;
- insert(&pq, source);
  while(pq->heap.size!=0){
-   vertex* v=extract_min(&pq);
+   vertex* v=extract_min(pq);
 
    if (v->unvisited){
-
-     int row=vertex->id;
+     int row=v->id;
      for (int neighbor=0; neighbor<N; neighbor++){
+       //assumes a matrix of nonnegative weights
        if (Graph[row][neighbor]!=0){
-         nodes[neighbor].unvisited=1;
-         if (nodes[neighbor].label>vertex->label+1){
-           nodes[neighbor].label=vertex->label+1;
-           Enqueue(&pq,&nodes[neighbor]);
-       }
+         V[neighbor].unvisited=false;
+         if (nodes[neighbor].label>vertex->label+Graph[row][neighbor]){
+           V[neighbor].label=vertex->label+Graph[row][neighbor];
+           pq_insert(pq,V[neighbor]);
+      }
      }
-   }
+    }
    }
  }
 }
 
-void initialize(vertex V[N]){
-
- for (int i =0; i < N; i++){
+void dijkstra(priority_queue* pq, vertex V[N], Graph[N][N]){
+ //initialize vertices
+ for (int i = 1; i < N; i++){
   V[i].unvisited = true;
   V[i].label = INT_MAX;
-  pq_insert(&pq, V[i]);
+ }
+ //the vertex to start the algorithm with
+ adj_lvl_labeling(V,pq,V[0],Graph);
+
+ //make sure we visit all connected graphs
+ for (int i = 0; i < N; i++){
+   if (V[i].unvisited){
+    adj_lvl_labeling(V,pq,V[i],G);
+   }
  }
 }
