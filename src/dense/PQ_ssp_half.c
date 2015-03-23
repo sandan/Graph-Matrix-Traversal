@@ -5,27 +5,28 @@
 #include <malloc.h>
 #include <assert.h>
 #include <papi.h>
+#include "../../include/priority_q.h"
 
-struct PQueue nodeQueue;
+struct pq priorty_queue;
 
-/* allocate space for RING,HALF, and nodes array for the queue */
-struct node nodes[N]; //N is set at compile time
+/* allocate space for RING,HALF, and vertices array for the queue */
+vertex vertices[N]; //N is set at compile time
 int HALF[N][N];       //adj matrix rep of half-connected graph
 
-void adj_lvl_labeling(struct node source, int G[N][N]){
+void adj_lvl_labeling(struct vertex source, int G[N][N]){
  source.label=0;
- insert(&nodeQueue,source.label);
- while(nodeQueue.size!=0){
-   struct node* vertex=Dequeue(&nodeQueue);
-   int label=extractmin(&nodeQueue);
+ insert(&vertexQueue,source.label);
+ while(vertexQueue.size!=0){
+   struct vertex* vertex=Dequeue(&nodeQueue);
+   int label=extractmin(&vertexQueue);
    int row=vertex->id,neighbor;
    for (neighbor=0;neighbor<N;neighbor++){
      if (G[row][neighbor]!=0){
-       nodes[neighbor].visited=1;
-       if (nodes[neighbor].label>vertex->label+label){
-         nodes[neighbor].label=vertex->label+label;
-         Enqueue(&nodeQueue,&nodes[neighbor]);
-         insert(&nodeQueue,nodes[neighbor].label);
+       vertices[neighbor].visited=1;
+       if (vertices[neighbor].label>vertex->label+label){
+         vertices[neighbor].label=vertex->label+label;
+         Enqueue(&vertexQueue,&vertices[neighbor]);
+         insert(&vertexQueue,vertices[neighbor].label);
        }
      }
    }
@@ -46,16 +47,16 @@ return 0;
 void setup(){
  srand(time(NULL));
  int i;
- /*initialize the nodes array to access nodes*/
+ /*initialize the vertices array to access vertexs*/
  for (i=0; i<N; ++i){
-   struct node v;
+   struct vertex v;
    v.id=i;
-   nodes[i]=v;
+   vertices[i]=v;
  }
   /*create the HALF graph*/
  int j,row;
  for (i=0; i<N; i++){
-  row=nodes[i].id;
+  row=vertices[i].id;
   for(j=0; j<N;j++){
    if(rand()%2==1){
     HALF[row][j]=1;
@@ -100,7 +101,7 @@ if (PAPI_start(EventSet) != PAPI_OK)
         handle_error(1);
 
 /* BFS level labeling */
-adj_lvl_labeling(nodes[0],HALF);
+adj_lvl_labeling(vertices[0],HALF);
 
 /* stop counting in the Event Set */
 if (PAPI_stop(EventSet, values) != PAPI_OK)

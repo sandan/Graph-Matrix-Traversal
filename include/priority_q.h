@@ -9,6 +9,6 @@
 //the heap based priority queue 
 typedef struct{
   heap* H; //heap H
-} priorty_queue;
+} pq;
 
 #endif
